@@ -3,13 +3,35 @@ import './App.css';
 import { useEffect, useState } from 'react';
 function App() {
 
-  const [ connected, setConnected ] = useState(false)
+  const [ connected, setConnected ] = useState(false);
+  const [ connected2, setConnected2 ] = useState(false);
+  const [ connected3, setConnected3 ] = useState(false)
+  const [ connected4, setConnected4 ] = useState(false)
 
+  const url = 'https://vercel-test-jet-iota.vercel.app';
   useEffect(() => {
-	console.log('let us see')
-	fetch('https://vercel-test-jet-iota.vercel.app/')
-	.then(res => setConnected(true))
+
+	fetch(url)
+	.then(res => res.json())
+	.then(res => { if (res.success) setConnected(true)})
 	.catch(e => console.error('error'))
+
+	fetch(`${url}`, {method: "POST"})
+	.then(res => res.json())
+	.then(res => {console.log(res); if (res.success) setConnected2(true)})
+	.catch(e => console.error('error'))
+
+	fetch(`${url}`, {method: "PUT"})
+	.then(res => res.json())
+	.then(res => {console.log(res); if (res.success) setConnected3(true)})
+	.catch(e => console.error('error'))
+
+	fetch(`${url}`, {method: "DELETE"})
+	.then(res => res.json())
+	.then(res => {console.log(res);if (res.success) setConnected4(true)})
+	.catch(e => console.error('error'))
+
+
   }, [])
   return (
     <div className="App">
@@ -18,14 +40,16 @@ function App() {
         <p>
          { connected ? "connected to vercel!" : "not connected to vercel."}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+		<p>
+         { connected2 ? "connected to post vercel!" : "not connected to post vercel."}
+        </p>
+		<p>
+         { connected3 ? "connected to put vercel!" : "not connected to put vercel."}
+        </p>
+		<p>
+         { connected4 ? "connected to delete vercel!" : "not connected to delete vercel."}
+        </p>
+        
       </header>
     </div>
   );
