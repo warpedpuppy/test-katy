@@ -1,13 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
-
+import { useEffect, useState } from 'react';
 function App() {
+
+  const [ connected, setConnected ] = useState(false)
+
+  useEffect(() => {
+	console.log('let us see')
+	fetch('https://vercel-test-jet-iota.vercel.app/')
+	.then(res => setConnected(true))
+	.catch(e => console.error('error'))
+  }, [])
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+         { connected ? "connected!" : "not connected."}
         </p>
         <a
           className="App-link"
