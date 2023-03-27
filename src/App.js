@@ -16,7 +16,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-         { connected ? "connected!" : "not connected."}
+         { connected ? "connected to vercel!" : "not connected to vercel."}
         </p>
         <a
           className="App-link"
